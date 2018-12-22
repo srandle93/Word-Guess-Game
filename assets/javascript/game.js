@@ -10,45 +10,71 @@
 var score = 0;
 var random = 0;
 var guesses = 12;
-var words = ["ELEMENT", "ARRAY", "STYLESHEET", "JAVASCRIPT"]
-var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+var words = ["CLASS", "ELEMENT", "ARRAY", "STYLESHEET", "PSEUDOCODE", "COMPONENT", "JQUERY"];
+var rightGuess = [];
+var wrongGuess = [];
+var randomWordLetters = [];
+var randomWord;
+var userGuess;
 
-console.log("element");
-// This function is to pick amongst the "word" array declared above.
-function pickWord(){
-for (var i = 0; i<words.length; i++){
-    var random = Math.floor(Math.random() * words.lenth - 1);
-    var word = words[i];
-    // The code below is to have the word in place without displaying it.
-    document.getElementById("word").style.display = "none";
-    wordGuess()
+function start() {
+  guesses = 12;
+  randomWord = words[Math.floor(Math.random() * words.length)];
+  randomWordLetters = randomWord.split("");
+  console.log(randomWord);
+
+
+  document.getElementById("currentWord").innerHTML = randomWord;
+  document.getElementById("rightGuess").innerHTML = rightGuess;
+  document.getElementById("wrongGuess").innerHTML = wrongGuess;
 }
-}
 
-// This is to function a letter into each "underline" id when keyed.
-document.onkeyup = function(event){
-    letters (String.fromCharCode(event.keyCode));
-    var wordwrap = document.getElementById("wordWrap");
-};
-
-// This is to add score when correct word is guessed.
-  function updateScore() {
-    document.querySelector("#score").innerHTML = "Score: " + score;
+function letterCheck(letters) {
+  var correctLetter = false;
+  for (var i = 0; i < randomWordLetters.length; i++) {
+    if (randomWordLetters[i] === letters) {
+      correctLetter = true;
+    }
   }
 
-  // If correct letter is guessed, then it will be placed next to "word" id.
-// If it is wrong, then a circle will fill with color black.
-// if (letters===word[i]){
-// fill letter in respective "underline" id
-// }
-// else {
-// list letter along "guesses" id. fill a circle the color black.
-// }
+  if (correctLetter) {
+    document.getElementById("rightGuess").innerHTML = rightGuess;
+    rightGuess.push(letters);
+    for (var j = 0; j < randomWordLetters.length; j++) {
+      if (randomWordLetters[j] === letters) {
+        rightGuess[j] = letters;
+        rightGuess.push(letters);
+      }
+    }
+  }
+  else {
+    document.getElementById("wrongGuess").innerHTML = rightGuess;
+    wrongGuess.push(letters);
+    guesses--;
+  }
+  console.log(correctLetter);
+}
 
-// Win or Lose Alerts
-// if (words = words[i]){
-//     alert("You Won!")
-// }
-// else{
-//     alert("You Lose")
-// }
+function gameStat() {
+  document.getElementById("rightGuess").innerHTML = rightGuess;
+  document.getElementById("wrongGuess").innerHTML = wrongGuess;
+
+  if (randomWordLetters.toString() === rightGuess.toString()) {
+    alert("You win!");
+    start();
+  }
+
+  else if (guesses === 0) {
+    alert("You lose");
+    start();
+  }
+}
+
+start();
+
+document.onkeyup = function(event) {
+  var userGuess = String.fromCharCode(event.which).toUpperCase();
+  letterCheck(userGuess);
+  gameStat();
+  console.log(event);
+};

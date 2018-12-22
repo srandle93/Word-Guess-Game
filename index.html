@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Word Guess Game</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 </head>
 <body style="background-color:grey">
 
@@ -15,11 +17,11 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-sm"></div>
-            <div class="col-sm"></div>
-            <div class="col-sm"></div>
-            <div class="col-sm"></div>
-            <div class="col-sm"></div>
+            <div class="col-sm" id="one"></div>
+            <div class="col-sm" id="two"></div>
+            <div class="col-sm" id="three"></div>
+            <div class="col-sm" id="four"></div>
+            <div class="col-sm" id="five"></div>
             <div class="col-sm"></div>
             <div class="col-sm"></div>
             <div class="col-sm"></div>
@@ -36,10 +38,13 @@
                     <p>&nbsp&nbsp&nbsp&nbsp&lt/body&gt</p><p>&lt/html&gt</p>
                 </section>
             </div>
+                        
+            <div id="currentWord"></div>
+            
             <div class="col">
                 <div style="color:black" id="wordWrap">
-                    <div id="word">word:</div>
-                    <div id="underline1">X</div>
+                    <p id="rightGuess"></p>
+                    <!-- <div id="underline1">X</div>
                     <div id="underline2">X</div>
                     <div id="underline3">X</div>
                     <div id="underline4">X</div>
@@ -48,9 +53,9 @@
                     <div id="underline7">X</div>
                     <div id="underline8">X</div>
                     <div id="underline9">X</div>
-                    <div id="underline10">X</div>
+                    <div id="underline10">X</div> -->
                 </div>
-                    <div id="letters" style="color: darkblue">Guesses:</div>
+                    <p id="wrongGuess" style="color: darkblue">Guesses:</p>
             </div>
         </div>
     </div>
